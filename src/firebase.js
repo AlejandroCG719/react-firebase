@@ -1,5 +1,5 @@
-require("firebase/firestore");
 import firebase from "firebase";
+require("firebase/firestore");
         // Your web app's Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyADSrCEcWvdtJnhF0OwGfXpc03B6EiCmLo",

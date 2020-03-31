@@ -44,6 +44,9 @@ html, body {
 .site-page-header {
   border: 1px solid rgb(235, 237, 240);
 }
+.app_main_navigation{
+  margin-bottom: 20px;
+}
 .app_container{
   margin-top: 20px ;
   width: 900px;
