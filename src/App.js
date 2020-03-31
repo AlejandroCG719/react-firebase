@@ -3,6 +3,7 @@ import './App.css';
 import Post from './components/Post';
 import Posts from "./components/Posts";
 import CreatePost from "./components/CreatePost";
+import UpdatePost from "./components/UpdatePost";
 import { Router, Link } from '@reach/router'
 import { Menu } from "antd";
 import { ReadOutlined, FormOutlined } from '@ant-design/icons';
@@ -24,8 +25,9 @@ function App() {
         </div>
         <Router>
             <Posts path="posts" default/>
-            <CreatePost path="create_post" />
             <Post path="post/:id"/>
+            <CreatePost path="create_post" />
+            <UpdatePost path="update_post/:id" />
         </Router>
     </div>
   );

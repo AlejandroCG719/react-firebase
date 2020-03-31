@@ -11,7 +11,7 @@ const CreatePost = (props)=>{
     const [content, setContent]= useState('');
     const onTitleChange = (e)=> setTitle(e.target.value);
     const onContentChange = (e)=> setContent(e.target.value);
-    const onCreatePost = () =>{
+    const onEditPost = () =>{
         let postRef = db.collection('posts');
 
         let payload = { title,content };
@@ -52,8 +52,8 @@ const CreatePost = (props)=>{
                     </div>
                 </div>
                 <div className="post_input_button">
-                    <Button type="primary" onClick={onCreatePost}>
-                        Create Post
+                    <Button type="primary" onClick={onEditPost}>
+                        Update Post
                     </Button>
                 </div>
 

@@ -13,7 +13,7 @@ const PostSnippet = (props) =>{
                         <Link to={`/post/${props.id}`} style={{ marginRight: '15px'} } >
                             Read Full Article
                         </Link>
-                        <Link to={`/post/${props.id}`}>
+                        <Link to={`/update_post/${props.id}`}>
                             Edit
                         </Link>
                     </div>

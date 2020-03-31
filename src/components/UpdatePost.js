@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { PageHeader , Input, Button } from "antd";
 import db from "../firebase";
 import { navigate } from "@reach/router";
@@ -11,31 +11,34 @@ const UpdatePost = (props)=>{
     const [content, setContent]= useState('');
 
     useEffect( () =>{
-        let  postRef = db.collection('posts').doc(props.id);
+        let  postRef = db
+            .collection('posts')
+            .doc(props.id);
+
         postRef
             .get()
             .then( doc =>{
-                let data =doc.data();
+                let { content , title } = doc.data();
                 setTitle(title);
-                setContent(content)
-
+                setContent(content);
             });
-
-    },[]);
+    },[] );
 
     const onTitleChange = (e)=> setTitle(e.target.value);
     const onContentChange = (e)=> setContent(e.target.value);
-    const onCreatePost = () =>{
-        let postRef = db.collection('posts');
+
+    const onUpdatePost = () =>{
+        let postRef = db
+            .collection('posts')
+            .doc(props.id);
 
         let payload = { title,content };
 
-        postRef.add(payload)
+        postRef.update(payload)
             .then(function (doc) {
-                console.log("Document succesfully writtem!", doc.id);
+                console.log("Document succesfully updated...!");
             });
-        setTitle('');
-        setContent('');
+
         navigate( `/posts`)
     };
 
@@ -66,8 +69,8 @@ const UpdatePost = (props)=>{
                     </div>
                 </div>
                 <div className="post_input_button">
-                    <Button type="primary" onClick={onCreatePost}>
-                        Create Post
+                    <Button type="primary" onClick={onUpdatePost}>
+                       Update Post
                     </Button>
                 </div>
 
