@@ -13,9 +13,11 @@ const PostSnippet = (props) =>{
                         <Link to={`/post/${props.id}`} style={{ marginRight: '15px'} } >
                             Read Full Article
                         </Link>
-                        <Link to={`/update_post/${props.id}`}>
-                            Edit
-                        </Link>
+                        { props.user &&
+                            <Link to={`/update_post/${props.id}`}>
+                                Edit
+                            </Link>
+                        }
                     </div>
                 }>
               <p className="article_container">

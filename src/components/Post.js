@@ -2,19 +2,22 @@ import React, { useState, useEffect } from "react";
 import {PageHeader, Card} from "antd";
 import db from "../firebase";
 const Post = (props) =>{
-    const [ title, setTitle] =useState('');
-    const [ content, setContent] =useState('');
 
-    useEffect( () =>{
-        let  postRef = db.collection('posts').doc(props.id);
+    const [ title, setTitle] = useState('');
+    const [ content, setContent] = useState('');
+
+    useEffect( () => {
+        let  postRef = db
+            .collection('posts')
+            .doc(props.id);
+
         postRef
             .get()
             .then( doc =>{
-                let data =doc.data();
+                let { content, title } = doc.data();
                 setTitle(title);
-                setContent(content)
-
-        });
+                setContent(content);
+            });
 
     },[]);
     return (
@@ -23,13 +26,17 @@ const Post = (props) =>{
             <div className="page_header_container">
                 <PageHeader
                     className="site-page-header"
-                    title={title}
+                    title={ title }
                 />
             </div>
             <div className="post_content_container">
                 <Card style={{marginTop: "20px"}}
                 >
-
+                    {
+                        content.split('\n').map((paragraph, idx ) =>{
+                            return <p key={idx}>{paragraph}</p>
+                        })
+                    }
                 </Card>
             </div>
         </div>

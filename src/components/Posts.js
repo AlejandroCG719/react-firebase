@@ -7,6 +7,8 @@ import db from "../firebase"
 function Posts(props) {
 
     const  [posts, setPosts]= useState([]);
+    console.log("Props data");
+    console.log(props);
 
     useEffect(() => {
         let postRef = db.collection('posts')
@@ -45,7 +47,9 @@ function Posts(props) {
                             key={key}
                             id={article.id}
                             title={_.capitalize(article.title)}
-                            content={article.content.substring(1,10)}/>
+                            content={article.content.substring(1,10)}
+                            user={props.user}
+                        />
                     )
                     })
                    }
