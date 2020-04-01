@@ -9,11 +9,12 @@ const CreatePost = (props)=>{
 
     const [title, setTitle]= useState('');
     const [content, setContent]= useState('');
+
     const onTitleChange = (e)=> setTitle(e.target.value);
     const onContentChange = (e)=> setContent(e.target.value);
-    const onEditPost = () =>{
-        let postRef = db.collection('posts');
 
+    const onCreatPost = () =>{
+        let postRef = db.collection('users').doc(props.user.uid).collection('posts');
         let payload = { title,content };
 
         postRef.add(payload)
@@ -52,8 +53,8 @@ const CreatePost = (props)=>{
                     </div>
                 </div>
                 <div className="post_input_button">
-                    <Button type="primary" onClick={onEditPost}>
-                        Update Post
+                    <Button type="primary" onClick={onCreatPost}>
+                       Create Post
                     </Button>
                 </div>
 

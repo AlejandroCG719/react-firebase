@@ -62,3 +62,10 @@ html, body {
   margin-top: 20px;
   float: right;
 }
+.post_snippets_link{
+  float: left;
+}
+.post_edit_links{
+  margin-left: 15px;
+  float: right;
+}

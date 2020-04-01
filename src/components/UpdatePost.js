@@ -12,6 +12,8 @@ const UpdatePost = (props)=>{
 
     useEffect( () =>{
         let  postRef = db
+            .collection('users')
+            .doc(props.user.uid)
             .collection('posts')
             .doc(props.id);
 
@@ -29,6 +31,8 @@ const UpdatePost = (props)=>{
 
     const onUpdatePost = () =>{
         let postRef = db
+            .collection('users')
+            .doc(props.user.uid)
             .collection('posts')
             .doc(props.id);
 

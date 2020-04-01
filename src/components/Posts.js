@@ -5,29 +5,23 @@ import _ from "lodash";
 import db from "../firebase"
 
 function Posts(props) {
-
     const  [posts, setPosts]= useState([]);
-    console.log("Props data");
+
     console.log(props);
 
     useEffect(() => {
-        let postRef = db.collection('posts')
-        postRef
-            .get()
-            .then(posts => {
-                posts.forEach(post => {
+        db.collection('users').doc(props.user.uid).collection('posts')
+            .onSnapshot(async posts => {
+                let postsData = await posts.docs.map( post => {
                     let data = post.data();
                     let { id } = post;
-                    //console.log('this is the post');
-                    //console.log(data,id)
-
-
                     let payload = {
                         id,
                         ...data
-                    }
-                    setPosts ((posts) => [...posts, payload])
-                })
+                    };
+                    return payload;
+                });
+                setPosts (postsData);
             })
     },[]);
 

@@ -7,7 +7,7 @@ import UpdatePost from "./components/UpdatePost";
 import SignUp from "./components/SignUp";
 import { Router, Link } from '@reach/router'
 import { Menu } from "antd";
-import { ReadOutlined, FormOutlined, LogoutOutlined } from '@ant-design/icons';
+import { ReadOutlined, FormOutlined, CloseCircleTwoTone,LogoutOutlined } from '@ant-design/icons';
 import SignIn from "./components/SignIn";
 import { auth } from "./firebase";
 
@@ -18,15 +18,11 @@ function App() {
 
     auth.onAuthStateChanged(function (User) {
         if (User){
-            console.log(User);
+            //console.log(User);
             setUser(User);
-
         } else{
-
             console.log(" No User sign in ");
-
         }
-
     });
     const OnSingOut = () =>{
         auth.signOut()
@@ -64,7 +60,7 @@ function App() {
                     </Menu.Item>
                     :
                     <Menu.Item key="sing_out" style={{ float:"right" }}  >
-                        <LogoutOutlined />
+                        <CloseCircleTwoTone />
                         <a onClick={OnSingOut}> Sign Out </a>
                     </Menu.Item>
                 }
@@ -75,9 +71,9 @@ function App() {
             <SignUp path="sign_up" />
             <SignIn path="sign_in" default />
             <Posts path="posts" user={ User } />
-            <Post path="post/:id" />
-            <CreatePost path="create_post" />
-            <UpdatePost path="update_post/:id" />
+            <Post path="post/:id" user={ User }/>
+            <CreatePost path="create_post" user={ User } />
+            <UpdatePost path="update_post/:id" user={ User } />
         </Router>
     </div>
   );
