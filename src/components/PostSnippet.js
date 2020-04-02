@@ -23,7 +23,7 @@ const PostSnippet = (props) =>{
                 title={props.title}
                 extra={
                     <div className="post_snippets_link">
-                        <Link  to={`/post/${props.id}`}>
+                        <Link  to={`/blogs/${props.uid}/post/${props.id}`}>
                             Read Full Article
                         </Link>
                         { props.user &&
@@ -42,9 +42,7 @@ const PostSnippet = (props) =>{
                 }>
               <p className="article_container">
                   {
-                      props.content.split('\n').map((paragraph, idx ) =>{
-                          return <p key={idx}>{paragraph}</p>
-                      })
+                      props.content
 
                   }
               </p>

@@ -8,6 +8,8 @@ const Post = (props) =>{
 
     useEffect( () => {
         let  postRef = db
+            .collection('users')
+            .doc(props.uid)
             .collection('posts')
             .doc(props.id);
 
@@ -33,9 +35,7 @@ const Post = (props) =>{
                 <Card style={{marginTop: "20px"}}
                 >
                     {
-                        content.split('\n').map((paragraph, idx ) =>{
-                            return <p key={idx}>{paragraph}</p>
-                        })
+                        content
                     }
                 </Card>
             </div>

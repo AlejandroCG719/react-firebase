@@ -6,12 +6,12 @@ import CreatePost from "./components/CreatePost";
 import UpdatePost from "./components/UpdatePost";
 import SignUp from "./components/SignUp";
 import { Router, Link } from '@reach/router'
-import { Menu } from "antd";
-import { ReadOutlined, FormOutlined, CloseCircleTwoTone,LogoutOutlined } from '@ant-design/icons';
+
 import SignIn from "./components/SignIn";
 import { auth } from "./firebase";
+import AppNav from "./components/AppNav";
 
-function App() {
+function App(props) {
 
     const [ User , setUser] = useState(false);
 
@@ -24,54 +24,15 @@ function App() {
             console.log(" No User sign in ");
         }
     });
-    const OnSingOut = () =>{
-        auth.signOut()
-            .then(function() {
-            // Sign-out successful.
-                console.log('Bye');
-                setUser(false)
-        }).catch(function(error) {
-            // An error happened.
-            console.log("Error en el OnSingOut");
-        });
-
-    };
-
 
   return (
     <div className="app_container">
-        <div className="app_main_navigation">
-            <Menu mode="horizontal">
-                <Menu.Item key="mail">
-                    <ReadOutlined />
-                    <Link to="/posts"> Posts   </Link>
-                </Menu.Item>
-               { User &&
-                    <Menu.Item key="create_post" >
-                        <FormOutlined />
-                        <Link to="/create_post"> Create Post </Link>
-                    </Menu.Item>}
-                {
-                    !User
-                    ?
-                    <Menu.Item key="sing_out" style={{ float:"right" }}  >
-                        <LogoutOutlined />
-                        <Link to="/sign_in"> Sign In</Link>
-                    </Menu.Item>
-                    :
-                    <Menu.Item key="sing_out" style={{ float:"right" }}  >
-                        <CloseCircleTwoTone />
-                        <a onClick={OnSingOut}> Sign Out </a>
-                    </Menu.Item>
-                }
-
-            </Menu>
-        </div>
+        <AppNav user={User}/>
         <Router>
             <SignUp path="sign_up" />
             <SignIn path="sign_in" default />
-            <Posts path="posts" user={ User } />
-            <Post path="post/:id" user={ User }/>
+            <Posts path="blogs/:uid/posts" user={ User } />
+            <Post path="blogs/:uid/post/:id" user={ User }/>
             <CreatePost path="create_post" user={ User } />
             <UpdatePost path="update_post/:id" user={ User } />
         </Router>
